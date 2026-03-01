@@ -23,7 +23,7 @@ namespace RestaurantManager
         {
             
 
-            string connStr = "server=localhost;user=root;database=idk12;password=12311231000;";
+            string connStr = "server=127.0.0.1;port=3306;user=root;database=idk12;password=rootpass;";
             using (var conn = new MySqlConnection(connStr))
             {
                 conn.Open();
@@ -71,7 +71,7 @@ namespace RestaurantManager
                 return;
             }
 
-            string connStr = "server=localhost;user=root;database=idk12;password=12311231000;";
+            string connStr = "server=127.0.0.1;port=3306;user=root;database=Restaurant;password=rootpass;";
 
             try
             {
@@ -83,7 +83,7 @@ namespace RestaurantManager
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", Username.Text.Trim());
-                        cmd.Parameters.AddWithValue("@password", Password.Text);   // plaintext hell, but school project rules
+                        cmd.Parameters.AddWithValue("@password", Password.Text);
 
                         object result = cmd.ExecuteScalar();
 
@@ -91,11 +91,9 @@ namespace RestaurantManager
                         {
                             string role = result.ToString();
 
-                            // Save current user somewhere accessible
                             CurrentUser.Username = Username.Text.Trim();
                             CurrentUser.Role = role;
 
-                            // Open the main form and hide login
                             MainForm mainForm = new MainForm();
                             mainForm.Show();
                             this.Hide();
@@ -103,7 +101,7 @@ namespace RestaurantManager
                         else
                         {
                             MessageBox.Show("Wrong username or password.", "Login failed");
-                            Password.Text = "";   // clear password on fail
+                            Password.Text = "";
                         }
                     }
                 }

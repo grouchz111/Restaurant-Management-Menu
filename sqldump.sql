@@ -51,41 +51,6 @@ INSERT INTO `Menu` VALUES (1,'Burger',10,'Main Dishes',8.99),(2,'Fries',25,'Side
 UNLOCK TABLES;
 
 --
--- Table structure for table `Menu1`
---
-
-DROP TABLE IF EXISTS `Menu1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Menu1` (
-  `idnew_table` int NOT NULL AUTO_INCREMENT,
-  `Product Name` varchar(45) DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
-  `Category` varchar(45) NOT NULL,
-  PRIMARY KEY (`idnew_table`),
-  UNIQUE KEY `idnew_table_UNIQUE` (`idnew_table`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Menu1`
---
-
-LOCK TABLES `Menu1` WRITE;
-/*!40000 ALTER TABLE `Menu1` DISABLE KEYS */;
-INSERT INTO `Menu1` VALUES (2,'Burger',10,''),(3,'Fries',25,''),(4,'Cola',50,''),(5,'Pizza',8,''),(6,'Salad',12,''),(7,'Chicken Wrap',15,''),(8,'Ice Cream',20,'');
-/*!40000 ALTER TABLE `Menu1` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Current Database: `idk12`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `idk12` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `idk12`;
-
---
 -- Table structure for table `Categories`
 --
 
@@ -96,7 +61,7 @@ CREATE TABLE `Categories` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +70,7 @@ CREATE TABLE `Categories` (
 
 LOCK TABLES `Categories` WRITE;
 /*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
-INSERT INTO `Categories` VALUES (1,'Appetizers'),(2,'Main Courses'),(3,'Desserts'),(4,'Drinks'),(5,'Appetizers'),(6,'Main Courses'),(7,'Desserts'),(8,'Drinks');
+INSERT INTO `Categories` VALUES (1,'Appetizers'),(2,'Main Courses'),(3,'Desserts'),(4,'Drinks');
 /*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +92,7 @@ CREATE TABLE `Dishes` (
   KEY `CategoryId` (`CategoryId`),
   CONSTRAINT `Dishes_ibfk_1` FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`Id`),
   CONSTRAINT `Dishes_chk_1` CHECK ((`Price` > 0))
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,8 +101,62 @@ CREATE TABLE `Dishes` (
 
 LOCK TABLES `Dishes` WRITE;
 /*!40000 ALTER TABLE `Dishes` DISABLE KEYS */;
-INSERT INTO `Dishes` VALUES (1,'Caesar Salad','Romaine, parmesan, croutons, dressing',9.99,1,'images/caesar.jpg'),(2,'Bruschetta','Toasted bread with tomatoes and basil',7.50,1,'images/bruschetta.jpg'),(3,'Grilled Salmon','Fresh salmon with lemon herb sauce',18.75,2,'images/salmon.jpg'),(4,'Beef Burger','Classic with cheese and fries',14.00,2,'images/burger.jpg'),(5,'Chocolate Lava Cake','Warm cake with molten center',8.25,3,'images/lava.jpg'),(6,'Coca-Cola','Chilled classic',2.99,4,NULL),(7,'Caesar Salad','Romaine, parmesan, croutons, dressing',9.99,1,'images/caesar.jpg'),(8,'Bruschetta','Toasted bread with tomatoes and basil',7.50,1,'images/bruschetta.jpg'),(9,'Grilled Salmon','Fresh salmon with lemon herb sauce',18.75,2,'images/salmon.jpg'),(10,'Beef Burger','Classic with cheese and fries',14.00,2,'images/burger.jpg'),(11,'Chocolate Lava Cake','Warm cake with molten center',8.25,3,'images/lava.jpg'),(12,'Coca-Cola','Chilled classic',2.99,4,NULL);
+INSERT INTO `Dishes` VALUES (1,'Caesar Salad','Romaine, parmesan, croutons, dressing',9.99,1,'images/caesar.jpg'),(2,'Bruschetta','Toasted bread with tomatoes and basil',7.50,1,'images/bruschetta.jpg'),(3,'Grilled Salmon','Fresh salmon with lemon herb sauce',18.75,2,'images/salmon.jpg'),(4,'Beef Burger','Classic with cheese and fries',14.00,2,'images/burger.jpg'),(5,'Chocolate Lava Cake','Warm cake with molten center',8.25,3,'images/lava.jpg'),(6,'Coca-Cola','Chilled classic',2.99,4,NULL);
 /*!40000 ALTER TABLE `Dishes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Users`
+--
+
+DROP TABLE IF EXISTS `Users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Users` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Username` varchar(50) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Role` enum('Admin','Waiter') NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Username` (`Username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Users`
+--
+
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'admin','admin123','Admin'),(2,'waiter1','waiter','Waiter'),(3,'waiter2','waiter2','Waiter');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Orders`
+--
+
+DROP TABLE IF EXISTS `Orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Orders` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `WaiterId` int NOT NULL,
+  `OrderDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `TotalPrice` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `WaiterId` (`WaiterId`),
+  CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`WaiterId`) REFERENCES `Users` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Orders`
+--
+
+LOCK TABLES `Orders` WRITE;
+/*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -172,58 +191,6 @@ LOCK TABLES `OrderItems` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Orders`
---
-
-DROP TABLE IF EXISTS `Orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Orders` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `WaiterId` int NOT NULL,
-  `OrderDate` datetime DEFAULT CURRENT_TIMESTAMP,
-  `TotalPrice` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `WaiterId` (`WaiterId`),
-  CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`WaiterId`) REFERENCES `Users` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Orders`
---
-
-LOCK TABLES `Orders` WRITE;
-/*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Users`
---
-
-DROP TABLE IF EXISTS `Users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Users` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `Username` varchar(50) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Role` enum('Admin','Waiter') NOT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `Username` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Users`
---
-
-LOCK TABLES `Users` WRITE;
-/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'admin','admin123','Admin'),(2,'waiter1','waiter','Waiter');
-/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
