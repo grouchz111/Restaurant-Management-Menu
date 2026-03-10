@@ -131,7 +131,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button LogButton;
         private System.Windows.Forms.RichTextBox Password;
         private System.Windows.Forms.RichTextBox Username;
